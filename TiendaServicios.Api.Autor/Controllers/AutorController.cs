@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TiendaServicios.Api.Autor.Aplicacion;
+using TiendaServicios.Api.Autor.Modelo;
 
 namespace TiendaServicios.Api.Autor.Controllers
 {
@@ -22,6 +23,14 @@ namespace TiendaServicios.Api.Autor.Controllers
             return await _mediator.Send(data);
 
         }
+
+
+        [HttpGet]
+        public async Task<ActionResult<List<AutorLibro>>> GetAutores()
+        {
+            return await _mediator.Send(new Consulta.ListaAutor());
+        }
+
 
 
     }
