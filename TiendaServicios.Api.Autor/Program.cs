@@ -19,6 +19,8 @@ builder.Services.AddDbContext<ContextoAutor>(options =>
 
 builder.Services.AddMediatR(typeof(Nuevo.Manejador).Assembly);
 
+builder.Services.AddAutoMapper(typeof(Consulta.Manejador));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
