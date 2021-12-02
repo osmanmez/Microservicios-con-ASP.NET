@@ -10,6 +10,7 @@ namespace TiendaServicios.Api.Libro.Aplicacion
 
         public class Ejecuta : IRequest
         {
+
             public string Titulo { get; set; }
             public string? FechaPublicacion { get; set; }
             public Guid? AutorLibro { get; set; }
@@ -25,43 +26,42 @@ namespace TiendaServicios.Api.Libro.Aplicacion
                 }
 
             }
+        }
 
-            public class Manejador : IRequestHandler<Ejecuta>
+
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+
+            public readonly ContextoLibreria _contexto;
+
+
+            public Manejador(ContextoLibreria contexto)
             {
+                _contexto = contexto;
+            }
 
-                private readonly ContextoLibreria _contexto;
 
-
-                public Manejador(ContextoLibreria contexto)
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var libro = new LibreriaMaterial
                 {
-                    _contexto = contexto;
+                    Titulo = request.Titulo,
+                    FechaPublicacion = request.FechaPublicacion,
+                    AutorLibro = request.AutorLibro
+                };
+
+                _contexto.LibreriaMaterial.Add(libro);
+                var value = await _contexto.SaveChangesAsync();
+                if (value > 0)
+                {
+                    return Unit.Value;
                 }
 
-
-                public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-                {
-                    var libro = new LibreriaMaterial
-                    {
-                        Titulo = request.Titulo,
-                        FechaPublicacion = request.FechaPublicacion,
-                        AutorLibro = request.AutorLibro
-                    };
-
-
-                    _contexto.LibreriaMaterial.Add(libro);
-                    var value = await _contexto.SaveChangesAsync();
-                    if(value > 0)
-                    {
-                        return Unit.Value;
-                    }
-
-                    throw new Exception("No se pudo guardar el libro");
-
-
-                }
+                throw new Exception("No se pudo guardar el libro");
 
 
             }
+
 
         }
 
