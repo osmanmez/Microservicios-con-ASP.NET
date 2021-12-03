@@ -22,7 +22,14 @@ namespace TiendaServicios.Api.Libro.Controllers
         {
             return await _mediator.Send(data);
         }
-        
+
+        [HttpGet]
+        public async Task<ActionResult<List<LibreriaMaterialDto>>> GetLibros()
+        {
+            return await _mediator.Send(new Consulta.Ejecuta());
+        }
+
+
 
     }
 }

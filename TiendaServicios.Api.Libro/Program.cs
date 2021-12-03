@@ -20,6 +20,8 @@ builder.Services.AddControllers().AddFluentValidation(cfg => cfg.RegisterValidat
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(typeof(Consulta.Ejecuta));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
