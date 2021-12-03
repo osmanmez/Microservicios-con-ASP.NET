@@ -22,10 +22,9 @@ namespace TiendaServicios.Api.CarritoCompra.Aplicacion
             public readonly CarritoContexto _contexto;
             public readonly IMapper _mapper;
 
-            public Manejador(CarritoContexto contexto, IMapper mapper)
+            public Manejador(CarritoContexto contexto)
             {
                 _contexto = contexto;
-                _mapper = mapper;
             }
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)

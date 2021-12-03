@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using TiendaServicios.Api.CarritoCompra.Aplicacion;
 using TiendaServicios.Api.CarritoCompra.Persistencia;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,9 @@ builder.Services.AddDbContext<CarritoContexto>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
 });
+
+
+builder.Services.AddMediatR(typeof(Nuevo.Manejador).Assembly);
 
 var app = builder.Build();
 
