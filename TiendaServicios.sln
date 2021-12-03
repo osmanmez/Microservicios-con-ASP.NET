@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiendaServicios.Api.Autor", "TiendaServicios.Api.Autor\TiendaServicios.Api.Autor.csproj", "{E8A8B07E-556F-44AB-87E3-9C6AE92A5754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaServicios.Api.Libro", "TiendaServicios.Api.Libro\TiendaServicios.Api.Libro.csproj", "{78E763E7-BA2F-46CF-9F51-A6EE43B94071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TiendaServicios.Api.Libro", "TiendaServicios.Api.Libro\TiendaServicios.Api.Libro.csproj", "{78E763E7-BA2F-46CF-9F51-A6EE43B94071}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaServicios.Api.CarritoCompra", "TiendaServicios.Api.CarritoCompra\TiendaServicios.Api.CarritoCompra.csproj", "{191ECD60-F884-408C-BEB6-95EC0A533512}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{78E763E7-BA2F-46CF-9F51-A6EE43B94071}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78E763E7-BA2F-46CF-9F51-A6EE43B94071}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78E763E7-BA2F-46CF-9F51-A6EE43B94071}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191ECD60-F884-408C-BEB6-95EC0A533512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191ECD60-F884-408C-BEB6-95EC0A533512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191ECD60-F884-408C-BEB6-95EC0A533512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191ECD60-F884-408C-BEB6-95EC0A533512}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
