@@ -9,8 +9,6 @@
 
         public string? FechaPublicacion { get; set; }
 
-        public Guid? AutorLibro { get; set; }
-
 
     }
 }
