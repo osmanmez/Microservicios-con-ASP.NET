@@ -21,6 +21,10 @@ builder.Services.AddDbContext<CarritoContexto>(options =>
 
 
 builder.Services.AddMediatR(typeof(Nuevo.Manejador).Assembly);
+builder.Services.AddHttpClient("Libros", config =>
+{
+    config.BaseAddress = new Uri(builder.Configuration["Services:Libros"]);
+});
 
 var app = builder.Build();
 
