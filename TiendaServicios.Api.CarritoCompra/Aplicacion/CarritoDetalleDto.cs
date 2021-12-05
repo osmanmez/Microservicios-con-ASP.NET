@@ -8,7 +8,7 @@
         
         public string AutorLibto { get; set; }
 
-        public DateTime? FechaPublicacion { get; set; }
+        public string? FechaPublicacion { get; set; }
 
     }
 }

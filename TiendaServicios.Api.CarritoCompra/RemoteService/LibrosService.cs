@@ -7,12 +7,12 @@ namespace TiendaServicios.Api.CarritoCompra.RemoteService
     public class LibrosService : ILibrosService
     {
 
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientFactory _httpClient;
         private readonly ILogger<LibrosService> _logger;
 
         public LibrosService(IHttpClientFactory httpClient, ILogger<LibrosService> logger)
         {
-            _httpClientFactory = httpClient;
+            _httpClient= httpClient;
             _logger = logger;
         }
 
@@ -21,7 +21,7 @@ namespace TiendaServicios.Api.CarritoCompra.RemoteService
             try
             {
 
-                var cliente = _httpClientFactory.CreateClient("Libros");
+                var cliente = _httpClient.CreateClient("Libros");
                 var response = await cliente.GetAsync($"api/LibroMaterial/{LibroId}");
 
                 if (response.IsSuccessStatusCode)
