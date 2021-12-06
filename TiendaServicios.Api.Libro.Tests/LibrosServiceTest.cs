@@ -63,7 +63,7 @@ namespace TiendaServicios.Api.Libro.Tests
               {
                   cfg.AddProfile(new MappingTest());
               });
-        
+
             var mapper = mapConfig.CreateMapper();
 
 
@@ -75,7 +75,7 @@ namespace TiendaServicios.Api.Libro.Tests
 
             var manejador = new ConsultaFiltro.Manejador(mockContexto.Object, mapper);
 
-             var libro = await   manejador.Handle(request, new System.Threading.CancellationToken());
+            var libro = await manejador.Handle(request, new System.Threading.CancellationToken());
 
             Assert.NotNull(libro);
             Assert.True(libro.LibreriaMaterialId == Guid.Empty);
@@ -87,7 +87,7 @@ namespace TiendaServicios.Api.Libro.Tests
         [Fact]
         public async void GetLibros()
         {
-            System.Diagnostics.Debugger.Launch();
+         //   System.Diagnostics.Debugger.Launch();
 
             var mockContexto = CrearContexto();
 
@@ -107,6 +107,29 @@ namespace TiendaServicios.Api.Libro.Tests
             Assert.True(lista.Any());
 
         }
+
+        [Fact]
+        public async void GuardarLibro()
+        {
+            System.Diagnostics.Debugger.Launch();
+
+            var options = new DbContextOptionsBuilder<ContextoLibreria>()
+                .UseInMemoryDatabase(databaseName: "Base DatosLibro")
+                .Options;
+
+            var contexto = new ContextoLibreria(options);
+
+            var request = new Nuevo.Ejecuta();
+            request.Titulo = "";
+            request.AutorLibro = Guid.Empty;
+            request.FechaPublicacion = "2021-10-31";
+
+            var manejador = new Nuevo.Manejador(contexto);
+            var libro = await manejador.Handle(request, new System.Threading.CancellationToken());
+
+            Assert.True(libro != null);
+        }
+
 
     }
 }
