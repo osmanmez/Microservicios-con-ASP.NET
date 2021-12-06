@@ -27,7 +27,7 @@ namespace TiendaServicios.Api.Libro.Tests
             lista[0].LibreriaMaterialId = Guid.Empty;
 
             return lista;
-        
+
         }
 
         private Mock<ContextoLibreria> CrearContexto()
@@ -46,10 +46,40 @@ namespace TiendaServicios.Api.Libro.Tests
             dbSet.As<IAsyncEnumerable<LibreriaMaterial>>().Setup(x => x.GetAsyncEnumerator(new System.Threading.CancellationToken()))
                 .Returns(new AsyncEnumerator<LibreriaMaterial>(dataPrueba.GetEnumerator()));
 
+            dbSet.As<IQueryable<LibreriaMaterial>>().Setup(x => x.Provider).Returns(new AsyncQueryProvider<LibreriaMaterial>(dataPrueba.Provider));
+
             var contexto = new Mock<ContextoLibreria>();
 
             contexto.Setup(x => x.LibreriaMaterial).Returns(dbSet.Object);
             return contexto;
+
+        }
+
+        [Fact]
+        public async void GetLibroPorId()
+        {
+            var mockContexto = CrearContexto();
+            var mapConfig = new MapperConfiguration(cfg =>
+              {
+                  cfg.AddProfile(new MappingTest());
+              });
+        
+            var mapper = mapConfig.CreateMapper();
+
+
+            // Instancia 
+            var request = new ConsultaFiltro.LibroUnico();
+
+            // Set ID 0
+            request.LibroId = Guid.Empty;
+
+            var manejador = new ConsultaFiltro.Manejador(mockContexto.Object, mapper);
+
+             var libro = await   manejador.Handle(request, new System.Threading.CancellationToken());
+
+            Assert.NotNull(libro);
+            Assert.True(libro.LibreriaMaterialId == Guid.Empty);
+
 
         }
 
@@ -59,7 +89,7 @@ namespace TiendaServicios.Api.Libro.Tests
         {
             System.Diagnostics.Debugger.Launch();
 
-            var mockContexto =  CrearContexto();
+            var mockContexto = CrearContexto();
 
             var mackConfig = new MapperConfiguration(cfg =>
             {
