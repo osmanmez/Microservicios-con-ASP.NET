@@ -16,9 +16,9 @@ namespace TiendaServicios.Api.Autor.Migrations
                 {
                     AutorLibroId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<int>(type: "integer", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: false),
                     Apellido = table.Column<string>(type: "text", nullable: false),
-                    FechaNacimiento = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    FechaNacimiento = table.Column<string>(type: "text", nullable: false),
                     AutorLibroGuid = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>

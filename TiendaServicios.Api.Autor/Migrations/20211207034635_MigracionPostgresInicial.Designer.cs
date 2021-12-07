@@ -12,7 +12,7 @@ using TiendaServicios.Api.Autor.Persistencia;
 namespace TiendaServicios.Api.Autor.Migrations
 {
     [DbContext(typeof(ContextoAutor))]
-    [Migration("20211128140009_MigracionPostgresInicial")]
+    [Migration("20211207034635_MigracionPostgresInicial")]
     partial class MigracionPostgresInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,11 +40,13 @@ namespace TiendaServicios.Api.Autor.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("FechaNacimiento")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("FechaNacimiento")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<int>("Nombre")
-                        .HasColumnType("integer");
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("AutorLibroId");
 
