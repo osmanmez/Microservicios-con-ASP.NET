@@ -8,16 +8,18 @@ namespace TiendaServicios.Api.Autor.ManejadorRabbit
     {
         private readonly ILogger<EmailEventoManejador> _logger;
 
-        public EmailEventoManejador() {}
 
         public EmailEventoManejador(ILogger<EmailEventoManejador> logger)
         {
             _logger = logger;
         }
 
+
+        public EmailEventoManejador() {}
+
         public Task Handle(EmailEventQueue @event)
         {
-            _logger.LogInformation($"Este es el valor que consume desde rabbitmq {@event.Titulo}");
+            _logger.LogInformation(@event.Titulo);
 
                 return Task.CompletedTask;
         }

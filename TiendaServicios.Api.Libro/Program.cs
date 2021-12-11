@@ -17,7 +17,16 @@ builder.Services.AddDbContext<ContextoLibreria>(opt =>
 });
 
 builder.Services.AddMediatR(typeof(Nuevo.Manejador).Assembly);
-builder.Services.AddTransient<IRabbitEventBus, RabbitEventBus>();
+
+
+//builder.Services.AddTransient<IRabbitEventBus, RabbitEventBus>();
+builder.Services.AddSingleton<IRabbitEventBus, RabbitEventBus>(sp =>
+{
+    var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+    return new RabbitEventBus(sp.GetService<IMediator>(), scopeFactory);
+});
+
+
 builder.Services.AddControllers().AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Nuevo>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

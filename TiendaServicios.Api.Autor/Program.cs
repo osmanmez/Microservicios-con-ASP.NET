@@ -23,7 +23,14 @@ builder.Services.AddDbContext<ContextoAutor>(options =>
     );
 
 builder.Services.AddMediatR(typeof(Nuevo.Manejador).Assembly);
-builder.Services.AddTransient<IRabbitEventBus, RabbitEventBus>();
+builder.Services.AddSingleton<IRabbitEventBus, RabbitEventBus>(sp =>
+{
+    var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+    return new RabbitEventBus(sp.GetService<IMediator>(), scopeFactory);
+});
+
+builder.Services.AddTransient<EmailEventoManejador>();
+
 builder.Services.AddTransient<IEventoManejador<EmailEventQueue>, EmailEventoManejador>();
 
 builder.Services.AddAutoMapper(typeof(Consulta.Manejador));
