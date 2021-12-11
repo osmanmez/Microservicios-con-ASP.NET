@@ -37,7 +37,7 @@ namespace TiendaServicios.RabbitMQ.Bus.Implement
         {
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost"
+                HostName = "rabbit-osman-web"
             };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
@@ -79,7 +79,7 @@ namespace TiendaServicios.RabbitMQ.Bus.Implement
 
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost",
+                HostName = "rabbit-osman-web",
                 DispatchConsumersAsync = true
             };
 

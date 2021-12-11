@@ -29,4 +29,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TiendaServicios.RabbitMQ.Bus\TiendaServicios.RabbitMQ.Bus.csproj" />
+  </ItemGroup>
+
 </Project>
