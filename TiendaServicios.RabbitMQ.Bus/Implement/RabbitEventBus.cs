@@ -88,8 +88,39 @@ namespace TiendaServicios.RabbitMQ.Bus.Implement
             channel.QueueDeclare(eventoNombre, false, false, false, null);
 
             var consumer = new AsyncEventingBasicConsumer(channel);
-           // consumer.Received += Consumer_Delegate;
+            consumer.Received += Consumer_Delegate;
             channel.BasicConsume(eventoNombre, true, consumer);
+        }
+
+        private async Task Consumer_Delegate(object sender, BasicDeliverEventArgs e)
+        {
+            var nombreEvento = e.RoutingKey;
+            var message = Encoding.UTF8.GetString(e.Body.ToArray());
+
+            try
+            {
+
+                if (_manejadores.ContainsKey(nombreEvento))
+                {
+                    var subcriptions = _manejadores[nombreEvento];
+                    foreach(var sb in subcriptions)
+                    {
+                        var manejador = Activator.CreateInstance(sb);
+                        if (manejador == null) continue;
+                        var tipoEvento = _eventoTipos.SingleOrDefault(x => x.Name == nombreEvento);
+                        var eventoDS = JsonConvert.DeserializeObject(message, tipoEvento);
+
+                        var concretoTipo = typeof(IEventoManejador<>).MakeGenericType(tipoEvento);
+                        await (Task)concretoTipo.GetMethod("Handle").Invoke(manejador, new object[] { eventoDS });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
